@@ -1,6 +1,5 @@
 package br.edu.usf.poo.controller;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import br.edu.usf.poo.exceptions.NotConnectionEstablishedException;
+import br.edu.usf.poo.models.User;
 import br.edu.usf.poo.utils.EncryptionUtils;
 
 public class DataBase {
@@ -54,27 +54,49 @@ public class DataBase {
 		}
 	}
 	
-	public boolean validLogin(String login, String password) {
-		String encryptedPassword;
-		try {
-			encryptedPassword = EncryptionUtils.toSHA256Hash(password);
-			
-		} catch (NoSuchAlgorithmException e1) {
-			return false;
+	public User validateLogin(String login, String password) {
+		
+		Integer userID = getUserIDByLogin(login);
+		if (userID == null) {
+			return null;
 		}
 		
-		String sql = "SELECT * "
+		String encryptedPassword = EncryptionUtils.toSHA256Hash(userID + password);
+		
+		String sql = "SELECT userid, nome, login "
 				+ "FROM users "
-				+ "WHERE login = '" + login + "'"
+				+ "WHERE userID = " + userID + " "
 				+ "AND password = '" + encryptedPassword + "'";
 		
 		ResultSet resultSet = executeQuery(sql);
 		try {
-			return resultSet.next();
+			if (resultSet.next()) {
+				User user = new User(
+						resultSet.getInt("userid"),
+						resultSet.getString("nome"),
+						resultSet.getString("login"));
+				
+				return user;
+			}
+		} catch (Exception e) {}
+		
+		return null;
+	}
+	
+	private Integer getUserIDByLogin(String login) {
+		String sql = "SELECT userID "
+				+ "FROM users "
+				+ "WHERE login = '"+ login + "'";
+		
+		ResultSet resultSet = executeQuery(sql);
+		try {
+			if (resultSet.next()) {
+				return resultSet.getInt("userID");
+			}
 			
-		} catch (Exception e) {
-			return false;
-		} 
+		} catch (SQLException e) {}
+		
+		return null;
 	}
 	
 	private ResultSet executeQuery(String sql) {

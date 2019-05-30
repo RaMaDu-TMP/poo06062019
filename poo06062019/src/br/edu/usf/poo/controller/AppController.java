@@ -1,9 +1,10 @@
 
 package br.edu.usf.poo.controller;
 
-import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
+
+import br.edu.usf.poo.view.DlgLogin;
+import br.edu.usf.poo.view.FrmMain;
 
 public class AppController {
 	private static AppController instance;
@@ -25,7 +26,7 @@ public class AppController {
 		try {
 			DataBase.close();
 			
-		} catch (SQLException e) {}
+		} catch (Exception e) {}
 		
 		System.exit(0);
 	}
@@ -37,13 +38,19 @@ public class AppController {
 	}
 
 	public void dbConnectionError(Exception e) {
+		String title = "Erro de conexão";
 		String message = "Erro ao estabelecer conexão com o banco de dados.\n"
 				+ "A aplicação será fechada";
-		String title = "Erro de conexão";
 		
 		JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
 		
 		shutdown();
+	}
+
+	public void loadMainScreen() {
+		DlgLogin.gi().dispose();
+		
+		FrmMain.gi().setVisible(true);
 	}
 	
 }

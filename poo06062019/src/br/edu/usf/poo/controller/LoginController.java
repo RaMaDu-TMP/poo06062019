@@ -21,7 +21,12 @@ public class LoginController {
 	}
 	
 	public boolean login(String login, String password) {
-		return DataBase.gi().validLogin(login, password);
+		if (currentUser != null) {
+			throw new UnsupportedOperationException("Can't change user");
+		}
+		
+		currentUser = DataBase.gi().validateLogin(login, password);
+		return currentUser != null;
 	}
 	
 	public User getCurrentUser() {

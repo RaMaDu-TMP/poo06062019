@@ -11,6 +11,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		// For development only
+		System.setProperty("poo.login", "admin");
+		System.setProperty("poo.password", "admin");
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			
@@ -19,8 +23,7 @@ public class Main {
 		}
 		
 		EventQueue.invokeLater(() -> {
-			DlgLogin dlgLogin = new DlgLogin();
-			dlgLogin.setVisible(true);
+			DlgLogin.gi().setVisible(true);
 			
 			DataBase.gi();
 		});
