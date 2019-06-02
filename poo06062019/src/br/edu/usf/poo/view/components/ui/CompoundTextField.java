@@ -232,6 +232,14 @@ public class CompoundTextField extends JPanel {
 		textField.requestFocus();
 	}
 	
+	@Override
+	public void setBackground(Color bg) {
+		super.setBackground(bg);
+		if (textField != null) {
+			textField.setBackground(bg);
+		}
+	}
+	
 	public boolean isHideHintOnFocus() {
 		return textFieldUI.isHideHintOnFocus();
 	}
