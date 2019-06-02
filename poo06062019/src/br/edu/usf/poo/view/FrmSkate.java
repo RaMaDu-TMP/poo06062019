@@ -6,8 +6,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,7 +24,6 @@ import br.edu.usf.poo.models.Roda;
 import br.edu.usf.poo.models.Rolamento;
 import br.edu.usf.poo.models.Shape;
 import br.edu.usf.poo.models.Truck;
-import br.edu.usf.poo.view.components.autocomplete.Autocomplete;
 
 public class FrmSkate extends JFrame {
 	/**
@@ -30,24 +31,14 @@ public class FrmSkate extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Autocomplete<Lixa>		 accLixa;
-	private Autocomplete<Roda>		 accRoda;
-	private Autocomplete<Rolamento>	 accRolamento;
-	private Autocomplete<Shape>		 accShape;
-	private Autocomplete<Truck>		 accTruck;
+	private JComboBox<Lixa>		 accLixa;
+	private JComboBox<Roda>		 accRoda;
+	private JComboBox<Rolamento> accRolamento;
+	private JComboBox<Shape>	 accShape;
+	private JComboBox<Truck>	 accTruck;
 
 	public FrmSkate() {
 		initComponents();
-		
-		fillItems();
-	}
-	
-	private void fillItems() {
-		accLixa.setItems(LixaClient.gi().getAll());
-		accRoda.setItems(RodaClient.gi().getAll());
-		accRolamento.setItems(RolamentoClient.gi().getAll());
-		accShape.setItems(ShapeClient.gi().getAll());
-		accTruck.setItems(TruckClient.gi().getAll());
 	}
 	
 	private void save() {
@@ -81,7 +72,7 @@ public class FrmSkate extends JFrame {
 		gbc_lblLixa.gridy = 0;
 		panel.add(lblLixa, gbc_lblLixa);
 		
-		accLixa = new Autocomplete<>();
+		accLixa = new JComboBox<>(new Vector<>(LixaClient.gi().getAll()));
 		
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
@@ -104,7 +95,7 @@ public class FrmSkate extends JFrame {
 		gbc_lblRoda.gridy = 1;
 		panel.add(lblRoda, gbc_lblRoda);
 		
-		accRoda = new Autocomplete<>();
+		accRoda = new JComboBox<>(new Vector<>(RodaClient.gi().getAll()));
 		GridBagConstraints gbc_lblA = new GridBagConstraints();
 		gbc_lblA.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblA.insets = new Insets(0, 0, 5, 5);
@@ -119,7 +110,8 @@ public class FrmSkate extends JFrame {
 		gbc_lblRolamento.gridy = 2;
 		panel.add(lblRolamento, gbc_lblRolamento);
 		
-		accRolamento = new Autocomplete<>();
+		accRolamento = new JComboBox<>(new Vector<>(RolamentoClient.gi().getAll()));
+		
 		GridBagConstraints gbc_lblB = new GridBagConstraints();
 		gbc_lblB.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblB.insets = new Insets(0, 0, 5, 5);
@@ -134,7 +126,7 @@ public class FrmSkate extends JFrame {
 		gbc_lblShape.gridy = 3;
 		panel.add(lblShape, gbc_lblShape);
 		
-		accShape = new Autocomplete<>();
+		accShape = new JComboBox<>(new Vector<>(ShapeClient.gi().getAll()));
 		GridBagConstraints gbc_lblV = new GridBagConstraints();
 		gbc_lblV.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblV.insets = new Insets(0, 0, 5, 5);
@@ -149,7 +141,7 @@ public class FrmSkate extends JFrame {
 		gbc_lblTruck.gridy = 4;
 		panel.add(lblTruck, gbc_lblTruck);
 		
-		accTruck = new Autocomplete<>();
+		accTruck = new JComboBox<>(new Vector<>(TruckClient.gi().getAll()));
 		GridBagConstraints gbc_lblD = new GridBagConstraints();
 		gbc_lblD.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblD.insets = new Insets(0, 0, 0, 5);

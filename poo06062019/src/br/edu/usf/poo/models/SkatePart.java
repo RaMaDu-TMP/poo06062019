@@ -2,6 +2,8 @@ package br.edu.usf.poo.models;
 
 import com.google.common.base.Strings;
 
+import br.edu.usf.poo.client.MarcaClient;
+
 public abstract class SkatePart {
 
 	private int codLixa;
@@ -43,9 +45,20 @@ public abstract class SkatePart {
 
 	@Override
 	public String toString() {
-		return getPrefix() + " " + (Strings.isNullOrEmpty(getDesc()) ? "sem descrição" : getDesc());
+		String ret = "";
+		
+		Marca marca = MarcaClient.gi().getMarcaByID(getCodMarca());
+		if (marca != null) {
+			ret += marca.getNome() + " - ";
+		}
+		
+		return ret + getPrefix() + getSulfix();
 	}
 
+	private String getSulfix() {
+		return " " + (Strings.isNullOrEmpty(getDesc()) ? "sem descrição" : getDesc());
+	}
+	
 	protected abstract String getPrefix();
 	
 	public SkatePart() {

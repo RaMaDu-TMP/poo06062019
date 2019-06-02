@@ -24,6 +24,8 @@ public class MarcaClient {
 	
 	private MarcaClient() {
 		super();
+		
+		getAll();
 	}
 	
 	public List<Marca> getAll() {

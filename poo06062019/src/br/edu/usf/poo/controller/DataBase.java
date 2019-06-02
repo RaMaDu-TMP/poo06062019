@@ -177,19 +177,19 @@ public class DataBase {
 	public List<Rolamento> getRolamentos() {
 		List<Rolamento> rolamentos = new ArrayList<>();
 		
-		String sql = "SELECT codrolamento, codmarca, codrolamento, precorolamento::numeric "
+		String sql = "SELECT codrolamento, codmarca, descrolamento, precorolamento::numeric "
 				+ "FROM rolamento ";
 		
 		ResultSet resultSet = executeQuery(sql);
 		try {
 			while (resultSet.next()) {
-				Rolamento roda = new Rolamento();
-				roda.setCod(resultSet.getInt("codrolamento"));
-				roda.setCodMarca(resultSet.getInt("codmarca"));
-				roda.setDesc(resultSet.getString("codrolamento"));
-				roda.setPreco(resultSet.getFloat("precorolamento"));
+				Rolamento rolamento = new Rolamento();
+				rolamento.setCod(resultSet.getInt("codrolamento"));
+				rolamento.setCodMarca(resultSet.getInt("codmarca"));
+				rolamento.setDesc(resultSet.getString("descrolamento"));
+				rolamento.setPreco(resultSet.getFloat("precorolamento"));
 				
-				rolamentos.add(roda);
+				rolamentos.add(rolamento);
 			}
 		} catch (SQLException e) {
 			processQuerryException(e);
