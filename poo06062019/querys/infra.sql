@@ -85,6 +85,18 @@ CREATE TABLE Lixa
 );
 
 /**
+ * Criando tabela de Skates
+ */
+CREATE TABLE skates(
+	CodSkate	 SERIAL PRIMARY KEY,
+	CodLixa		 INT NOT NULL REFERENCES Lixa(CodLixa),
+	CodRolamento INT NOT NULL REFERENCES Rolamento(CodRolamento),
+	CodShape	 INT NOT NULL REFERENCES Shape(CodShape),
+	CodTruck	 INT NOT NULL REFERENCES Truck(CodTruck),
+	userID		 INT NOT NULL REFERENCES Users(userID)
+);
+
+/**
  * Populando Marcas
  */
 INSERT INTO Marca(NomeMarca) VALUES ('SantaCruz');		--1

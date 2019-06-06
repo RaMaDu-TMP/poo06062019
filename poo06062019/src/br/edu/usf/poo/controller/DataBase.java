@@ -14,6 +14,7 @@ import br.edu.usf.poo.models.Marca;
 import br.edu.usf.poo.models.Roda;
 import br.edu.usf.poo.models.Rolamento;
 import br.edu.usf.poo.models.Shape;
+import br.edu.usf.poo.models.Skate;
 import br.edu.usf.poo.models.Truck;
 import br.edu.usf.poo.models.User;
 import br.edu.usf.poo.utils.EncryptionUtils;
@@ -241,6 +242,32 @@ public class DataBase {
 			processQuerryException(e);
 		}
 		return trucks;
+	}
+	
+	public List<Skate> getSkates() {
+		List<Skate> skates = new ArrayList<Skate>();
+		
+		String sql = "SELECT codskate, codlixa, codrolamento, codshape, codtruck, userid "
+				+ "FROM skates";
+		
+		ResultSet resultSet = executeQuery(sql);
+		try {
+			while (resultSet.next()) {
+				Skate skate = new Skate();
+				skate.setCodSkate(resultSet.getInt("codskate"));
+				skate.setCodLixa(resultSet.getInt("codlixa"));
+				skate.setCodRolamento(resultSet.getInt("codrolamento"));
+				skate.setCodShape(resultSet.getInt("codshape"));
+				skate.setCodTruck(resultSet.getInt("codtruck"));
+				skate.setUserId(resultSet.getInt("userid"));
+				
+				skates.add(skate);
+			}
+		} catch (SQLException e) {
+			processQuerryException(e);
+		}
+		
+		return skates;
 	}
 	
 	private ResultSet executeQuery(String sql) {

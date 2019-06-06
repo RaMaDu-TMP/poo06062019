@@ -1,12 +1,17 @@
 package br.edu.usf.poo.client;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.edu.usf.poo.controller.DataBase;
 import br.edu.usf.poo.models.Shape;
 
 public class ShapeClient {
 	private static ShapeClient instance;
+	
+	private Map<Integer, Shape> cache;
+	private List<Shape> shapes;
 	
 	public static ShapeClient gi() {
 
@@ -19,10 +24,25 @@ public class ShapeClient {
 	
 	private ShapeClient() {
 		super();
+		
+		shapes = DataBase.gi().getShapes();
+		loadCahce();
+	}
+	
+	private void loadCahce() {
+		cache = new HashMap<>();
+		
+		for (Shape shape : shapes) {
+			cache.put(shape.getCod(), shape);
+		}
 	}
 	
 	public List<Shape> getAll() {
-		return DataBase.gi().getShapes();
+		return shapes;
+	}
+
+	public Shape getByID(int codShape) {
+		return cache.get(codShape);
 	}
 	
 }
