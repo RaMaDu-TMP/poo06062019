@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import br.edu.usf.poo.controller.DataBase;
 import br.edu.usf.poo.models.Truck;
 
@@ -41,7 +43,11 @@ public class TruckClient {
 		return trucks;
 	}
 
-	public Truck getByID(int codTruck) {
+	@Nullable
+	public Truck getByID(Integer codTruck) {
+		if (codTruck == null) {
+			return null;
+		}
 		return cache.get(codTruck);
 	}
 	

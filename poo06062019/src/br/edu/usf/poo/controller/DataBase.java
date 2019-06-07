@@ -247,7 +247,7 @@ public class DataBase {
 	public List<Skate> getSkates() {
 		List<Skate> skates = new ArrayList<Skate>();
 		
-		String sql = "SELECT codskate, codlixa, codrolamento, codshape, codtruck, userid "
+		String sql = "SELECT codskate, codlixa, codroda, codrolamento, codshape, codtruck, userid "
 				+ "FROM skates";
 		
 		ResultSet resultSet = executeQuery(sql);
@@ -256,6 +256,7 @@ public class DataBase {
 				Skate skate = new Skate();
 				skate.setCodSkate(resultSet.getInt("codskate"));
 				skate.setCodLixa(resultSet.getInt("codlixa"));
+				skate.setCodRoda(resultSet.getInt("codroda"));
 				skate.setCodRolamento(resultSet.getInt("codrolamento"));
 				skate.setCodShape(resultSet.getInt("codshape"));
 				skate.setCodTruck(resultSet.getInt("codtruck"));
@@ -268,6 +269,78 @@ public class DataBase {
 		}
 		
 		return skates;
+	}
+	
+	public boolean saveSkate(Skate skate) {
+		
+		if (skate.getCodSkate() == null) {
+			return insertSkate(skate);
+		}
+		
+		return updateSkate(skate);
+	}
+	
+	private boolean insertSkate(Skate skate) {
+		
+		Integer codLixa = skate.getCodLixa();
+		Integer codRoda = skate.getCodRoda();
+		Integer codRolamento = skate.getCodRolamento();
+		Integer codShape = skate.getCodShape();
+		Integer codTruck = skate.getCodTruck();
+		
+		int userid = LoginController.gi().getCurrentUser().getUserid();
+		
+		String sql = "INSERT INTO skates"
+				+ "("
+				+ "codlixa, codroda, codrolamento, codShape, codtruck, userid"
+				+ ") "
+				+ "VALUES"
+				+ "("
+				+ codLixa + ", " + codRoda + ", " + codRolamento + ", " + codShape + ", " + codTruck + ", " + userid
+				+ ")";
+		
+		try {
+			st.execute(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			processQuerryException(e);
+		}
+		
+		return false;
+	}
+	
+	private boolean updateSkate(Skate skate) {
+		
+		Integer codSkate = skate.getCodSkate();
+		Integer codLixa = skate.getCodLixa();
+		Integer codRoda = skate.getCodRoda();
+		Integer codRolamento = skate.getCodRolamento();
+		Integer codShape = skate.getCodShape();
+		Integer codTruck = skate.getCodTruck();
+		
+		int userid = LoginController.gi().getCurrentUser().getUserid();
+		
+		String sql = "UPDATE skates "
+				+ "SET "
+				+ "codlixa="		 + codLixa		 + ", "
+				+ "codroda="		 + codRoda		 + ", "
+				+ "codrolamento="	 + codRolamento	 + ", "
+				+ "codShape="		 + codShape		 + ", "
+				+ "codtruck="		 + codTruck		 + ", "
+				+ "userid=" 		 + userid
+				
+				+ "WHERE codskate=" + codSkate;
+		
+		try {
+			st.execute(sql);
+			
+			return true;
+		} catch (SQLException e) {
+			processQuerryException(e);
+		}
+		
+		return false;
 	}
 	
 	private ResultSet executeQuery(String sql) {

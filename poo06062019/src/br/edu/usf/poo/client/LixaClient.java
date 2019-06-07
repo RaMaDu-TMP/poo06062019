@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import br.edu.usf.poo.controller.DataBase;
 import br.edu.usf.poo.models.Lixa;
 
@@ -41,7 +43,12 @@ public class LixaClient {
 		}
 	}
 
-	public Lixa getByID(int codLixa) {
+	@Nullable
+	public Lixa getByID(Integer codLixa) {
+		if (codLixa == null) {
+			return null;
+		}
+		
 		return cache.get(codLixa);
 	}
 	

@@ -87,9 +87,10 @@ CREATE TABLE Lixa
 /**
  * Criando tabela de Skates
  */
-CREATE TABLE skates(
+CREATE TABLE Skates(
 	CodSkate	 SERIAL PRIMARY KEY,
 	CodLixa		 INT NOT NULL REFERENCES Lixa(CodLixa),
+	CodRoda		 INT NOT NULL REFERENCES Roda(CodRoda),
 	CodRolamento INT NOT NULL REFERENCES Rolamento(CodRolamento),
 	CodShape	 INT NOT NULL REFERENCES Shape(CodShape),
 	CodTruck	 INT NOT NULL REFERENCES Truck(CodTruck),

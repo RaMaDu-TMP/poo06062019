@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import br.edu.usf.poo.controller.DataBase;
 import br.edu.usf.poo.models.Shape;
 
@@ -41,7 +43,12 @@ public class ShapeClient {
 		return shapes;
 	}
 
-	public Shape getByID(int codShape) {
+	@Nullable
+	public Shape getByID(Integer codShape) {
+		if (codShape == null) {
+			return null;
+		}
+		
 		return cache.get(codShape);
 	}
 	

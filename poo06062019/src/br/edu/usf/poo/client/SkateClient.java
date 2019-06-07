@@ -54,4 +54,8 @@ public class SkateClient {
 		return matrix;
 	}
 	
+	public boolean save(Skate skate) {
+		return DataBase.gi().saveSkate(skate);
+	}
+	
 }

@@ -2,67 +2,67 @@ package br.edu.usf.poo.models;
 
 public class Skate {
 
-	private int codSkate;
-	private int codLixa;
-	private int codRoda;
-	private int codRolamento;
-	private int codShape;
-	private int codTruck;
-	private int userId;
+	private Integer codSkate;
+	private Integer codLixa;
+	private Integer codRoda;
+	private Integer codRolamento;
+	private Integer codShape;
+	private Integer codTruck;
+	private Integer userId;
 
-	public int getCodSkate() {
+	public Integer getCodSkate() {
 		return codSkate;
 	}
 
-	public void setCodSkate(int codSkate) {
+	public void setCodSkate(Integer codSkate) {
 		this.codSkate = codSkate;
 	}
 
-	public int getCodLixa() {
+	public Integer getCodLixa() {
 		return codLixa;
 	}
 
-	public void setCodLixa(int codLixa) {
+	public void setCodLixa(Integer codLixa) {
 		this.codLixa = codLixa;
 	}
 
-	public int getCodRoda() {
+	public Integer getCodRoda() {
 		return codRoda;
 	}
 	
-	public void setCodRoda(int codRoda) {
+	public void setCodRoda(Integer codRoda) {
 		this.codRoda = codRoda;
 	}
 	
-	public int getCodRolamento() {
+	public Integer getCodRolamento() {
 		return codRolamento;
 	}
 
-	public void setCodRolamento(int codRolamento) {
+	public void setCodRolamento(Integer codRolamento) {
 		this.codRolamento = codRolamento;
 	}
 
-	public int getCodShape() {
+	public Integer getCodShape() {
 		return codShape;
 	}
 
-	public void setCodShape(int codShape) {
+	public void setCodShape(Integer codShape) {
 		this.codShape = codShape;
 	}
 
-	public int getCodTruck() {
+	public Integer getCodTruck() {
 		return codTruck;
 	}
 
-	public void setCodTruck(int codTruck) {
+	public void setCodTruck(Integer codTruck) {
 		this.codTruck = codTruck;
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import br.edu.usf.poo.controller.DataBase;
 import br.edu.usf.poo.models.Rolamento;
 
@@ -41,7 +43,12 @@ public class RolamentoClient {
 		}
 	}
 
-	public Rolamento getByID(int codRolamento) {
+	@Nullable
+	public Rolamento getByID(Integer codRolamento) {
+		if (codRolamento == null) {
+			return null;
+		}
+		
 		return cache.get(codRolamento);
 	}
 	

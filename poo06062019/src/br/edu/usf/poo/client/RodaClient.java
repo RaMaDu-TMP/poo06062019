@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import br.edu.usf.poo.controller.DataBase;
 import br.edu.usf.poo.models.Roda;
 
@@ -41,7 +43,12 @@ public class RodaClient {
 		}
 	}
 
-	public Roda getByID(int codRoda) {
+	@Nullable
+	public Roda getByID(Integer codRoda) {
+		if (codRoda == null) {
+			return null;
+		}
+		
 		return cache.get(codRoda);
 	}
 	
